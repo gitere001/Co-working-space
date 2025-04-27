@@ -9,6 +9,7 @@ import BookingModal from '../components/home/BookingModal';
 import BookingDetailsModal from '../components/home/BookingDetailsModal';
 import { useDispatch } from 'react-redux';
 import { hideOverlay, showOverlay } from '../features/overlay/overlaySlice';
+import scrollToTop from '../utils/scrollTop';
 
 const Toast = ({ toast, onClose }) => {
   React.useEffect(() => {
@@ -88,6 +89,7 @@ const Dashboard = () => {
     if (isConfirmed) {
       setBookings((prev) => prev.filter((booking) => booking.id !== bookingId));
       addToast(`Booking for ${bookingName} cancelled successfully`, 'success');
+      scrollToTop()
     }
   };
 
@@ -104,6 +106,7 @@ const Dashboard = () => {
     setTimeout(() => {
       dispatch(hideOverlay());
       setDetailsModalOpen(false);
+      scrollToTop()
     }, 3000);
   };
 
@@ -122,6 +125,7 @@ const Dashboard = () => {
       setBookings((prev) => [...prev, newBooking]);
       setBookingModalOpen(false);
       dispatch(hideOverlay())
+      scrollToTop()
       addToast('Workspace booked successfully!', 'success');
     }
   };

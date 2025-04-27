@@ -18,8 +18,8 @@ const HomeButton = ({
   };
 
   const sizeStyles = {
-    sm: 'text-xs px-2.5 py-1.5',
-    md: 'text-sm px-4 py-2',
+    sm: 'text-xs px-2.5 py-3',
+    md: 'text-sm px-4 py-3',
     lg: 'text-base px-6 py-3',
   };
 

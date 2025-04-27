@@ -59,7 +59,7 @@ const Pricing = ({pricingRef}) => {
       {
         id: 'hot-desk',
         name: 'Hot Desk',
-        price: 'Kes 3000',
+        price: 'Kes 28800',
         description: 'Perfect for occasional use and flexibility.',
         features: [
           'Access during business hours',
@@ -69,12 +69,12 @@ const Pricing = ({pricingRef}) => {
           '2 hours of meeting room credits',
         ],
         popular: false,
-        billingPeriod: 'monthly'
+        billingPeriod: 'yearly'
       },
       {
         id: 'dedicated-desk',
         name: 'Dedicated Desk',
-        price: 'Kes 15000',
+        price: 'Kes 192000',
         description: 'Ideal for regular use with your own permanent desk.',
         features: [
           '24/7 access',
@@ -85,12 +85,12 @@ const Pricing = ({pricingRef}) => {
           'Business address service',
         ],
         popular: true,
-        billingPeriod: 'monthly'
+        billingPeriod: 'yearly'
       },
       {
         id: 'private-office',
         name: 'Private Office',
-        price: 'Kes 40000',
+        price: 'Kes 480000',
         description: 'Best for teams needing privacy and collaboration space.',
         features: [
           '24/7 access',
@@ -102,7 +102,7 @@ const Pricing = ({pricingRef}) => {
           'Customizable space options',
         ],
         popular: false,
-        billingPeriod: 'monthly'
+        billingPeriod: 'yearly'
       }
     ]
   };
@@ -118,7 +118,6 @@ const Pricing = ({pricingRef}) => {
             Choose the plan that works best for your needs and budget.
           </p>
 
-          {/* Billing toggle */}
           <div className="flex justify-center items-center mt-8">
             <button
               onClick={() => setBillingPeriod('monthly')}
@@ -161,7 +160,7 @@ const Pricing = ({pricingRef}) => {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{plan.name}</h3>
                 <div className="flex items-baseline mb-4">
                   <span className="text-4xl font-extrabold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-600 ml-1">/{billingPeriod === 'monthly' ? 'mo' : 'mo (billed yearly)'}</span>
+                  <span className="text-gray-600 ml-1">/{billingPeriod === 'monthly' ? 'mo' : 'yr'}</span>
                 </div>
                 <p className="text-gray-600 mb-6">{plan.description}</p>
 
