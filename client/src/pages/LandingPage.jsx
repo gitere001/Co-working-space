@@ -12,34 +12,47 @@ function LandingPage() {
   const aboutRef = useRef(null);
   const featuredRef = useRef(null);
   const pricingRef = useRef(null);
-
   const testimonialsRef = useRef(null);
-  useEffect(() => {
-    const section = location.pathname.split("/")[1];
-    console.log(section);
 
-    if (section === "about" && aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (section === "featured" && featuredRef.current) {
-      featuredRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (section === "pricing" && pricingRef.current) {
-      pricingRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (section === "testimonials" && testimonialsRef.current) {
-      testimonialsRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (section === "" && heroRef.current) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  useEffect(() => {
+    
+    const timeoutId = setTimeout(() => {
+      const section = location.pathname.split("/")[1];
+
+      if (section === "about" && aboutRef.current) {
+        aboutRef.current.scrollIntoView({ behavior: "smooth" });
+      } else if (section === "featured" && featuredRef.current) {
+        featuredRef.current.scrollIntoView({ behavior: "smooth" });
+      } else if (section === "pricing" && pricingRef.current) {
+        pricingRef.current.scrollIntoView({ behavior: "smooth" });
+      } else if (section === "testimonials" && testimonialsRef.current) {
+        testimonialsRef.current.scrollIntoView({ behavior: "smooth" });
+      } else if (section === "" && heroRef.current) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
   }, [location]);
+
   return (
-    <>
-      <section ref={heroRef}>
-        <Hero heroRef={heroRef} />
-        <Features featuredRef={featuredRef} />
-        <HowItWorks aboutRef={aboutRef} />
-        <Testimonials testimonialsRef={testimonialsRef} />
-        <Pricing pricingRef={pricingRef} />
-      </section>
-    </>
+    <div className="landing-page-container">
+      <div ref={heroRef}>
+        <Hero />
+      </div>
+      <div ref={featuredRef}>
+        <Features />
+      </div>
+      <div ref={aboutRef}>
+        <HowItWorks />
+      </div>
+      <div ref={testimonialsRef}>
+        <Testimonials />
+      </div>
+      <div ref={pricingRef}>
+        <Pricing />
+      </div>
+    </div>
   );
 }
 
