@@ -109,11 +109,10 @@ const SignupForm = () => {
   };
 
 
-  console.log("Error state:", error);
-console.log("Message state:", message);
+
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 relative">
+    <form onSubmit={handleSubmit} className="space-y-6 relative mb-3">
       {error && <Feedback isSuccess={false} message={error} />}
       {message && <Feedback isSuccess={true} message={message} />}
       <div className="flex justify-center mb-6">
@@ -184,12 +183,13 @@ console.log("Message state:", message);
       <div className="text-center mt-4">
         <p className="text-sm text-gray-600">
           Already have an account?{" "}
-          <Link
-            to="/login"
+          <span
+
+            onClick={() => {navigate("/login"); scrollToTop()}}
             className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
           >
             Sign in
-          </Link>
+          </span>
         </p>
       </div>
     </form>

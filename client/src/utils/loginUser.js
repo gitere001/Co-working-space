@@ -11,7 +11,7 @@ const loginUser = async (payload) => {
     if (response.data?.success) {
       // Store the access token in localStorage
       localStorage.setItem('MbPeShVmY', response.data.accessToken);
-      return { success: true };
+      return { success: true, data: response.data };
     } else {
       return { success: false, message: response.data.message || "Error logging in" };
     }

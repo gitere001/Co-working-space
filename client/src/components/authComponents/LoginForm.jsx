@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { User } from 'lucide-react';
-import FormInput from '../../ui/FormInput';
-import Button from '../../ui/Button';
-import loginUser from '../../utils/loginUser';
-import scrollToTop from '../../utils/scrollTop';
-import Feedback from '../Feedback';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { User } from "lucide-react";
+import FormInput from "../../ui/FormInput";
+import Button from "../../ui/Button";
+import loginUser from "../../utils/loginUser";
+import scrollToTop from "../../utils/scrollTop";
+import Feedback from "../Feedback";
+import { useDispatch } from "react-redux";
+import { setIsAuthenticated } from "../../features/auth/authorizationSlice";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [formErrors, setFormErrors] = useState({});
 
@@ -24,15 +27,15 @@ const LoginForm = () => {
     let isValid = true;
 
     if (!formValues.email) {
-      errors.email = 'Email is required';
+      errors.email = "Email is required";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      errors.email = 'Email is invalid';
+      errors.email = "Email is invalid";
       isValid = false;
     }
 
     if (!formValues.password) {
-      errors.password = 'Password is required';
+      errors.password = "Password is required";
       isValid = false;
     }
 
@@ -74,6 +77,8 @@ const LoginForm = () => {
         setTimeout(() => {
           setMessage(null);
           navigate("/home");
+          dispatch(setIsAuthenticated(true));
+
           scrollToTop();
         }, 2000);
       } else {
@@ -137,7 +142,10 @@ const LoginForm = () => {
             type="checkbox"
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
-          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+          <label
+            htmlFor="remember-me"
+            className="ml-2 block text-sm text-gray-700"
+          >
             Remember me
           </label>
         </div>
@@ -162,13 +170,16 @@ const LoginForm = () => {
 
       <div className="text-center mt-4">
         <p className="text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link
-            to="/signup"
+          Don't have an account?{" "}
+          <span
+            onClick={() => {
+              navigate("/signup");
+              scrollToTop();
+            }}
             className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
           >
             Sign up
-          </Link>
+          </span>
         </p>
       </div>
     </form>

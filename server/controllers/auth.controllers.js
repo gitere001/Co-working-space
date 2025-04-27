@@ -6,13 +6,13 @@ const generateTokens = (user) => {
   const accessToken = jwt.sign(
     { userId: user._id, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: '10m' }
   );
 
   const refreshToken = jwt.sign(
     { userId: user._id, role: user.role },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: '10m' }
   );
 
   return { accessToken, refreshToken };
@@ -83,7 +83,10 @@ export const loginUser = async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Login successful',
-      role: user.role,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
       accessToken
     });
   } catch (error) {
@@ -131,4 +134,31 @@ export const logoutUser = (req, res) => {
   res.clearCookie('accessToken');
   res.clearCookie('refreshToken');
   res.status(200).json({ success: true, message: 'Logout successful' });
+};
+
+export const getAuthenticatedUser = (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found."
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error, please try again."
+    });
+  }
 };
