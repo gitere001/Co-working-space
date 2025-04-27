@@ -6,7 +6,9 @@ import Badge from '../../ui/Badge';
 import HomeButton from '../../ui/HomeButton';
 import { formatDate } from '../../utils/formatDate';
 
+
 const BookingCard = ({ booking, onViewDetails, onCancelBooking, onPayNow }) => {
+
 
 
   const getStatusVariant = (status) => {

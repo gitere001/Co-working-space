@@ -1,7 +1,9 @@
 import React from "react";
 import { Search, Calendar, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <div className="relative bg-gray-900 h-screen flex items-center">
 
@@ -31,11 +33,15 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 mb-8 animate-[fadeIn_1.4s_ease-in]">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg flex items-center transition-all transform hover:scale-105">
+            <button
+            onClick={() => navigate("/pricing")}
+             className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg flex items-center transition-all transform hover:scale-105">
               <Search className="h-5 w-5 mr-2" />
               Browse Spaces
             </button>
-            <button className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg flex items-center transition-all transform hover:scale-105">
+            <button
+            onClick={()=> navigate("/login")}
+             className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg flex items-center transition-all transform hover:scale-105">
               <Calendar className="h-5 w-5 mr-2" />
               Book Now
             </button>
